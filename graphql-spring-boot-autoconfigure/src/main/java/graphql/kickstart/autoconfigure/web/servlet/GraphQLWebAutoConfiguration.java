@@ -72,6 +72,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -96,7 +97,7 @@ import org.springframework.web.util.UrlPathHelper;
 
 /** @author <a href="mailto:java.lang.RuntimeException@gmail.com">oEmbedler Inc.</a> */
 @Slf4j
-@Configuration
+@AutoConfiguration
 @RequiredArgsConstructor
 @Import(GraphQLInvokerAutoConfiguration.class)
 @ConditionalOnWebApplication(type = Type.SERVLET)

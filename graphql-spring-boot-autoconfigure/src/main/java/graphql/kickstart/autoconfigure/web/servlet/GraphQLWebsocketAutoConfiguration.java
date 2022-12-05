@@ -8,14 +8,15 @@ import graphql.kickstart.execution.subscriptions.GraphQLSubscriptionInvocationIn
 import graphql.kickstart.execution.subscriptions.SubscriptionConnectionListener;
 import graphql.kickstart.execution.subscriptions.apollo.KeepAliveSubscriptionConnectionListener;
 import graphql.kickstart.servlet.GraphQLWebsocketServlet;
+import jakarta.websocket.server.ServerContainer;
 import java.time.Duration;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import jakarta.websocket.server.ServerContainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
@@ -25,12 +26,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 import org.springframework.web.socket.server.standard.ServerEndpointRegistration;
 
-@Configuration
+@AutoConfiguration
 @RequiredArgsConstructor
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({DispatcherServlet.class, ServerEndpointRegistration.class})
