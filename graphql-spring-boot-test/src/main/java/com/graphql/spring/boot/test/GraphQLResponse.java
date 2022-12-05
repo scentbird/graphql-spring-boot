@@ -65,7 +65,7 @@ public class GraphQLResponse {
   }
 
   public HttpStatus getStatusCode() {
-    return responseEntity.getStatusCode();
+    return HttpStatus.resolve(responseEntity.getStatusCode().value());
   }
 
   public ResponseEntity<String> getRawResponse() {

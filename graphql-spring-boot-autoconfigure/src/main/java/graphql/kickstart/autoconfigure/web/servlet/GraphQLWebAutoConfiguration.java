@@ -57,15 +57,16 @@ import graphql.kickstart.servlet.input.GraphQLInvocationInputFactory;
 import graphql.kickstart.spring.error.ErrorHandlerSupplier;
 import graphql.kickstart.spring.error.GraphQLErrorStartupListener;
 import graphql.schema.GraphQLSchema;
+import jakarta.servlet.MultipartConfigElement;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.Executor;
-import javax.servlet.MultipartConfigElement;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
@@ -73,7 +74,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
@@ -95,7 +95,6 @@ import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.util.UrlPathHelper;
 
 /** @author <a href="mailto:java.lang.RuntimeException@gmail.com">oEmbedler Inc.</a> */
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Slf4j
 @Configuration
 @RequiredArgsConstructor
@@ -359,11 +358,9 @@ public class GraphQLWebAutoConfiguration {
       @Autowired(required = false) MultipartConfigElement multipartConfigElement) {
     ServletRegistrationBean<AbstractGraphQLHttpServlet> registration =
         new ServletRegistrationBean<>(servlet, graphQLServletProperties.getServletMapping());
-    if (multipartConfigElement != null) {
-      registration.setMultipartConfig(multipartConfigElement);
-    } else {
-      registration.setMultipartConfig(new MultipartConfigElement(""));
-    }
+    registration.setMultipartConfig(
+        Objects.requireNonNullElseGet(
+            multipartConfigElement, () -> new MultipartConfigElement("")));
     registration.setAsyncSupported(asyncServletProperties.isEnabled());
     return registration;
   }
