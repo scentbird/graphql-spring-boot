@@ -63,10 +63,7 @@ public class GraphQLWebsocketAutoConfiguration {
     }
     keepAliveListener().ifPresent(listeners::add);
     return new GraphQLWebsocketServlet(
-        graphQLInvoker,
-        invocationInputFactory,
-        graphQLObjectMapper,
-        listeners);
+        graphQLInvoker, invocationInputFactory, graphQLObjectMapper, listeners);
   }
 
   private Optional<SubscriptionConnectionListener> keepAliveListener() {
@@ -96,7 +93,10 @@ public class GraphQLWebsocketAutoConfiguration {
   public ServerEndpointRegistration serverEndpointRegistration(
       GraphQLWebsocketServlet servlet, WsCsrfFilter csrfFilter) {
     return new GraphQLWsServerEndpointRegistration(
-        websocketProperties.getPath(), servlet, csrfFilter);
+        websocketProperties.getPath(),
+        servlet,
+        csrfFilter,
+        websocketProperties.getAllowedOrigins());
   }
 
   @Bean
