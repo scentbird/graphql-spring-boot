@@ -7,15 +7,20 @@ import jakarta.websocket.server.ServerEndpointConfig;
 import org.springframework.context.Lifecycle;
 import org.springframework.web.socket.server.standard.ServerEndpointRegistration;
 
-/** @author Andrew Potter */
+/**
+ * @author Andrew Potter
+ */
 public class GraphQLWsServerEndpointRegistration extends ServerEndpointRegistration
     implements Lifecycle {
 
   private final GraphQLWebsocketServlet servlet;
+  private final WsCsrfFilter csrfFilter;
 
-  public GraphQLWsServerEndpointRegistration(String path, GraphQLWebsocketServlet servlet) {
+  public GraphQLWsServerEndpointRegistration(
+      String path, GraphQLWebsocketServlet servlet, WsCsrfFilter csrfFilter) {
     super(path, servlet);
     this.servlet = servlet;
+    this.csrfFilter = csrfFilter;
   }
 
   @Override
@@ -27,6 +32,7 @@ public class GraphQLWsServerEndpointRegistration extends ServerEndpointRegistrat
   public void modifyHandshake(
       ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
     super.modifyHandshake(sec, request, response);
+    csrfFilter.doFilter(request);
     servlet.modifyHandshake(sec, request, response);
   }
 

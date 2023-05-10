@@ -26,6 +26,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 import org.springframework.web.socket.server.standard.ServerEndpointRegistration;
@@ -79,9 +80,24 @@ public class GraphQLWebsocketAutoConfiguration {
   }
 
   @Bean
+  public WsCsrfFilter wsCsrfFilter(
+      @Autowired(required = false) WsCsrfTokenRepository csrfTokenRepository) {
+    return new WsCsrfFilter(csrfTokenRepository);
+  }
+
+  @Bean
+  @ConditionalOnMissingBean
+  @ConditionalOnClass(HttpSessionCsrfTokenRepository.class)
+  public WsCsrfTokenRepository wsCsrfTokenRepository() {
+    return new WsSessionCsrfTokenRepository();
+  }
+
+  @Bean
   @ConditionalOnClass(ServerContainer.class)
-  public ServerEndpointRegistration serverEndpointRegistration(GraphQLWebsocketServlet servlet) {
-    return new GraphQLWsServerEndpointRegistration(websocketProperties.getPath(), servlet);
+  public ServerEndpointRegistration serverEndpointRegistration(
+      GraphQLWebsocketServlet servlet, WsCsrfFilter csrfFilter) {
+    return new GraphQLWsServerEndpointRegistration(
+        websocketProperties.getPath(), servlet, csrfFilter);
   }
 
   @Bean
