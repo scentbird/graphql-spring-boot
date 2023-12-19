@@ -1,4 +1,8 @@
-# GraphQL and Graph*i*QL Spring Framework Boot Starters
+> [!WARNING]
+> ## THIS REPOSITORY HAS BEEN ARCHIVED AND IS NO LONGER BEING MAINTAINED
+> Since Spring now officially supports GraphQL with starters we have decided to archive this project. We encourage you to start using [Spring for GraphQL](https://spring.io/projects/spring-graphql) instead. 
+
+# GraphQL Spring Boot Starters
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.graphql-java-kickstart/graphql-spring-boot-starter.svg)](https://maven-badges.herokuapp.com/maven-central/com.graphql-java-kickstart/graphql-spring-boot-starter)
 [![Sonatype Snapshot](https://img.shields.io/nexus/s/com.graphql-java-kickstart/graphql-spring-boot-starter?server=https%3A%2F%2Foss.sonatype.org)](#snapshots)
@@ -6,14 +10,6 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=graphql-java-kickstart_graphql-spring-boot&metric=alert_status)](https://sonarcloud.io/dashboard?id=graphql-java-kickstart_graphql-spring-boot)
 [![GitHub contributors](https://img.shields.io/github/contributors/graphql-java-kickstart/graphql-spring-boot)](https://github.com/graphql-java-kickstart/graphql-spring-boot/graphs/contributors)
 [![Discuss on GitHub](https://img.shields.io/badge/GitHub-discuss-orange)](https://github.com/graphql-java-kickstart/graphql-spring-boot/discussions)
-
-#### We are looking for contributors!
-
-Are you interested in improving our documentation, working on the codebase, reviewing PRs?
-
-[Reach out to us on Discussions](https://github.com/graphql-java-kickstart/graphql-spring-boot/discussions)
-and join the team!
-
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
