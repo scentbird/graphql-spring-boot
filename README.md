@@ -1,6 +1,6 @@
 > [!WARNING]
 > ## THIS REPOSITORY HAS BEEN ARCHIVED AND IS NO LONGER BEING MAINTAINED
-> Since Spring now officially supports GraphQL we have decided to archive this project. We encourage you to start using [Spring for GraphQL](https://spring.io/projects/spring-graphql) instead. 
+> Since Spring now officially supports GraphQL we have decided to archive this project. We encourage you to start using [Spring for GraphQL](https://spring.io/projects/spring-graphql) instead. If you're projects rely on this library and you really require an update and cannot migrate to Spring for GraphQL yet, then you should fork this repository and make the necessary changes on your own.
 
 # GraphQL Spring Boot Starters
 
